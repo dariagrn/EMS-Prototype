@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Buildings - EMS Prototype{% endblock %}
+{% block content %}
+  <h1>Buildings</h1>
+  <div class="list-group">
+    {% for b in buildings %}
+      <a href="{{ url_for('building_detail', building_id=b.id) }}" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ b.name }}</h5>
+          <small>{{ b.city }}</small>
+        </div>
+        <p class="mb-1">{{ b.description }}</p>
+        <small>Last updated: {{ b.updated_at }}</small>
+      </a>
+    {% else %}
+      <div class="alert alert-secondary">No buildings found.</div>
+    {% endfor %}
+  </div>
+{% endblock %}

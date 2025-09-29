@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Contact - EMS Prototype{% endblock %}
+{% block content %}
+  <h1>Contact</h1>
+  <p>If you have questions about this prototype, email <a href="mailto:info@example.com">info@example.com</a>.</p>
+  <form>
+    <div class="mb-3">
+      <label class="form-label">Name</label>
+      <input class="form-control">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Message</label>
+      <textarea class="form-control" rows="4"></textarea>
+    </div>
+    <button class="btn btn-primary">Send</button>
+  </form>
+{% endblock %}

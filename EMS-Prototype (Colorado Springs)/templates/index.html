@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Home - EMS Prototype{% endblock %}
+{% block content %}
+  <div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+      <h1 class="display-5 fw-bold">Energy Management System</h1>
+      <p class="col-md-8 fs-4">Track building energy use, upload data, and visualize dashboards to reduce consumption.</p>
+      <a class="btn btn-primary btn-lg" href="{{ url_for('dashboard') }}">Go to Dashboard</a>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Buildings</h3>
+      <p>Explore buildings, meter readings, and analytics.</p>
+      <a href="{{ url_for('buildings') }}" class="btn btn-outline-secondary">View Buildings</a>
+    </div>
+    <div class="col-md-6">
+      <h3>Upload Data</h3>
+      <p>Upload CSVs or images for meter data and site photos.</p>
+      <a href="{{ url_for('upload') }}" class="btn btn-outline-secondary">Upload</a>
+    </div>
+  </div>
+{% endblock %}
