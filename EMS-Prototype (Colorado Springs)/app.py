@@ -85,6 +85,30 @@ class Reservation(db.Model):
             "end_time": self.end_time.isoformat(),
         }
 
+class IncidentReport(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(120), nullable=False)
+    phone = db.Column(db.String(40), nullable=False)
+    emergency_type = db.Column(db.String(40), nullable=False)
+    location = db.Column(db.String(80), nullable=False)
+    severity_level = db.Column(db.Integer, nullable=False)
+    description = db.Column(db.Text)  # New field for emergency description
+    media_filename = db.Column(db.String(255))  # New field for uploaded photo/video filename
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'phone': self.phone,
+            'emergency_type': self.emergency_type,
+            'location': self.location,
+            'severity_level': self.severity_level,
+            'description': self.description,
+            'media_filename': self.media_filename,
+            'timestamp': self.timestamp.isoformat(),
+        }
+
 # Utility functions
 def create_db():
     # Ensure we run within the Flask application context when creating DB
@@ -141,7 +165,7 @@ DEMO_BUILDINGS = [
         'address': '101 Main St',
         'city': 'Colorado Springs',
         'description': 'Municipal library with multiple meters and HVAC zones.',
-        'photo': 'building.jpeg',
+        'photo': 'security_library.png',  # Updated image
         'meters': [
             {'name': 'Main Meter', 'latest_value': 1250, 'units': 'kWh'},
             {'name': 'HVAC', 'latest_value': 540, 'units': 'kWh'},
@@ -155,7 +179,7 @@ DEMO_BUILDINGS = [
         'address': '500 Elm Ave',
         'city': 'Colorado Springs',
         'description': 'Gym and meeting rooms.',
-        'photo': 'rexus_logo.png',
+        'photo': 'community_center.png',  # Updated image
         'meters': [
             {'name': 'Main Meter', 'latest_value': 980, 'units': 'kWh'}
         ],
@@ -167,7 +191,7 @@ DEMO_BUILDINGS = [
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('home.html', hide_navbar=True)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -200,12 +224,18 @@ def building_detail(building_id):
     b = next((x for x in DEMO_BUILDINGS if x['id'] == building_id), None)
     if not b:
         abort(404)
-    # Build a copy and add a photo URL pointing to the uploads route
     building = dict(b)
-    if building.get('photo'):
-        building['photo_url'] = url_for('uploaded_file', filename=building['photo'])
+    photo_filename = building.get('photo')
+    photo_url = None
+    if photo_filename:
+        upload_path = os.path.join(app.config['UPLOAD_FOLDER'], photo_filename)
+        if os.path.exists(upload_path):
+            photo_url = url_for('uploaded_file', filename=photo_filename)
+        else:
+            photo_url = url_for('static', filename=f'images/{photo_filename}')
     else:
-        building['photo_url'] = None
+        photo_url = url_for('static', filename='images/placeholder.png')
+    building['photo_url'] = photo_url
     return render_template('building_detail.html', building=building)
 
 
@@ -443,6 +473,68 @@ def delete_reservation(current_user, res_id):
     db.session.delete(res)
     db.session.commit()
     return jsonify({'message': 'deleted'})
+
+# Incident reporting endpoint
+@app.route('/api/report-incident', methods=['POST'])
+def report_incident():
+    if request.content_type and request.content_type.startswith('multipart/form-data'):
+        # Handle file upload
+        name = request.form.get('name')
+        phone = request.form.get('phone')
+        emergency_type = request.form.get('type')
+        location = request.form.get('location')
+        severity_level = request.form.get('severity')
+        description = request.form.get('description')
+        file = request.files.get('media')
+        media_filename = None
+        if file and file.filename:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            media_filename = filename
+    else:
+        data = request.get_json() or {}
+        name = data.get('name')
+        phone = data.get('phone')
+        emergency_type = data.get('type')
+        location = data.get('location')
+        severity_level = data.get('severity')
+        description = data.get('description')
+        media_filename = data.get('media_filename')
+    try:
+        severity_level = int(severity_level)
+    except (TypeError, ValueError):
+        return jsonify({'message': 'Severity level must be a number.'}), 400
+    if not all([name, phone, emergency_type, location, severity_level]):
+        return jsonify({'message': 'All fields are required.'}), 400
+    report = IncidentReport(
+        name=name,
+        phone=phone,
+        emergency_type=emergency_type,
+        location=location,
+        severity_level=severity_level,
+        description=description,
+        media_filename=media_filename
+    )
+    db.session.add(report)
+    db.session.commit()
+    return jsonify({'message': 'Incident reported successfully.'}), 201
+
+@app.route('/incidents')
+@token_required
+def list_incidents(current_user):
+    if current_user.role != 'admin':
+        return abort(403)
+    incidents = IncidentReport.query.order_by(IncidentReport.timestamp.desc()).all()
+    return render_template('incidents.html', incidents=incidents)
+
+@app.route('/api/user-reports')
+def user_reports():
+    # For demo: filter by phone if user is logged in, else return all (in real app, use user id or session)
+    phone = request.args.get('phone')
+    # In a real app, use current_user or session info
+    # Here, just return all reports for demo
+    reports = IncidentReport.query.order_by(IncidentReport.timestamp.desc()).all()
+    return jsonify([r.to_dict() for r in reports])
 
 # CLI helper to initialize DB
 @app.cli.command('init-db')

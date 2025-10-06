@@ -1,0 +1,40 @@
+﻿{% extends 'base.html' %}
+{% block title %}Home - Colorado Springs EMS{% endblock %}
+{% block content %}
+<div class="row align-items-center justify-content-center mb-5">
+  <div class="col-md-5 mb-4 text-center">
+    <img src="{{ url_for('static', filename='images/amptier_logo-removebg-preview.png') }}" alt="Colorado Springs Logo" style="max-width:220px; width:80%;">
+    <div class="mt-4">
+      <img src="{{ url_for('static', filename='images/rexus_logo.png') }}" alt="Amptier Logo" style="max-width:140px; width:60%;">
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-center mb-5">
+  <div class="col-md-4 mb-3">
+    <div class="card h-100 shadow border-0 text-center p-4">
+      <div class="mb-3">
+        <span class="display-4" style="color:var(--brand-color)"><i class="bi bi-shield-lock"></i></span>
+      </div>
+      <h4 class="mb-2">Admin Portal</h4>
+      <p class="mb-3">Access management tools, user controls, and system settings for Colorado Springs EMS.</p>
+      <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg w-75">Admin Login</a>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card h-100 shadow border-0 text-center p-4">
+      <div class="mb-3">
+        <span class="display-4" style="color:var(--brand-accent)"><i class="bi bi-person-circle"></i></span>
+      </div>
+      <h4 class="mb-2">User Portal</h4>
+      <p class="mb-3">View building data, make reservations, and track energy usage. No login required.</p>
+      <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary btn-lg w-75">Enter User Portal</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block head %}
+  <!-- Bootstrap Icons CDN for feature icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+{% endblock %}

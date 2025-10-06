@@ -14,7 +14,7 @@
   <div class="row mt-3">
     <div class="col-md-7">
       <div class="card mb-3">
-        <img src="{{ building.photo_url if building.photo_url else url_for('static', filename='placeholder.png') }}" class="card-img-top" alt="{{ building.name }} photo">
+        <img src="{{ building.photo_url }}" class="card-img-top" alt="{{ building.name }} photo">
         <div class="card-body">
           <h5 class="card-title">Overview</h5>
           <p class="card-text">{{ building.description }}</p>

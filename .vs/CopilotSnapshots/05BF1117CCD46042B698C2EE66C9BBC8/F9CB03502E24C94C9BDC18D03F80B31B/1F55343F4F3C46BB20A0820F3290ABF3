@@ -1,0 +1,59 @@
+﻿{% extends 'base.html' %}
+{% block title %}{{ building.name }} - Building{% endblock %}
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <h1>{{ building.name }}</h1>
+      <p class="text-muted">{{ building.address }} — {{ building.city }}</p>
+    </div>
+    <div>
+      <a class="btn btn-outline-primary" href="{{ url_for('buildings') }}">Back to list</a>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-7">
+      <div class="card mb-3">
+        <img src="{{ building.photo_url }}" class="card-img-top" alt="{{ building.name }} photo">
+        <div class="card-body">
+          <h5 class="card-title">Overview</h5>
+          <p class="card-text">{{ building.description }}</p>
+        </div>
+      </div>
+
+      <h4>Meters</h4>
+      <ul class="list-group mb-3">
+        {% for m in building.meters %}
+          <li class="list-group-item">{{ m.name }} — {{ m.latest_value }} {{ m.units }}</li>
+        {% else %}
+          <li class="list-group-item">No meters available.</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-md-5">
+      <h4>Analytics</h4>
+      <div class="card p-3 mb-3">
+        <canvas id="buildingChart" style="height:250px"></canvas>
+      </div>
+      <h5>Recent Alerts</h5>
+      <ul class="list-group">
+        {% for a in building.alerts %}
+          <li class="list-group-item">{{ a }}</li>
+        {% else %}
+          <li class="list-group-item">No alerts.</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const bctx = document.getElementById('buildingChart');
+    if (bctx) {
+      new Chart(bctx, { type:'bar', data:{ labels:['Mon','Tue','Wed','Thu','Fri'], datasets:[{label:'kWh', data:[40,50,45,60,55], backgroundColor:'#007bff'}] } });
+    }
+  </script>
+{% endblock %}

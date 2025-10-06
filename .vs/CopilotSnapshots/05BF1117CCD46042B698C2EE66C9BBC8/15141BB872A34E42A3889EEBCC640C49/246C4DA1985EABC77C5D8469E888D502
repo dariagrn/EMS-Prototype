@@ -1,0 +1,64 @@
+﻿{% extends 'base.html' %}
+{% block title %}Dashboard - EMS Prototype{% endblock %}
+{% block content %}
+  <h1>Dashboard</h1>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Total Energy</h5>
+          <p class="card-text display-6">123,456 kWh</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Estimated Savings</h5>
+          <p class="card-text display-6">$12,345</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Alerts</h5>
+          <p class="card-text">2 buildings require attention</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <h3 class="mt-4">Charts</h3>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card p-3">
+        <canvas id="energyChart" style="height:300px"></canvas>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card p-3">
+        <canvas id="breakdownChart" style="height:300px"></canvas>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('energyChart');
+    if (ctx) {
+      new Chart(ctx, {
+        type: 'line',
+        data: { labels: ['Jan','Feb','Mar','Apr','May'], datasets: [{label:'kWh', data:[100,200,150,300,250], borderColor:'rgb(75,192,192)', tension:0.3}] },
+      });
+    }
+    const ctx2 = document.getElementById('breakdownChart');
+    if (ctx2) {
+      new Chart(ctx2, { type:'doughnut', data:{ labels:['HVAC','Lighting','Other'], datasets:[{data:[60,25,15], backgroundColor:['#007bff','#28a745','#ffc107']}] } });
+    }
+  </script>
+{% endblock %}

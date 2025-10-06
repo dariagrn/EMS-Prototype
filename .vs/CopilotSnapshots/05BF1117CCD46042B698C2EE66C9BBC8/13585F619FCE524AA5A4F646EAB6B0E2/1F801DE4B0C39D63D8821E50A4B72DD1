@@ -1,0 +1,173 @@
+﻿{% extends 'base.html' %}
+{% block title %}Dashboard - EMS Prototype{% endblock %}
+{% block content %}
+  <h1>Dashboard</h1>
+  <div class="mb-4 text-end">
+    <button class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#emergencyModal">
+      <i class="bi bi-exclamation-triangle me-2"></i>Report Emergency Incident
+    </button>
+  </div>
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Total Energy</h5>
+          <p class="card-text display-6">123,456 kWh</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Estimated Savings</h5>
+          <p class="card-text display-6">$12,345</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Alerts</h5>
+          <p class="card-text">2 buildings require attention</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+  <h3 class="mt-4">Charts</h3>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card p-3">
+        <canvas id="energyChart" style="height:300px"></canvas>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card p-3">
+        <canvas id="breakdownChart" style="height:300px"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Emergency Incident Modal -->
+  <div class="modal fade" id="emergencyModal" tabindex="-1" aria-labelledby="emergencyModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="emergencyForm">
+          <div class="modal-header">
+            <h5 class="modal-title" id="emergencyModalLabel">Report Emergency Incident</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="incidentName" class="form-label">Your Name</label>
+              <input type="text" class="form-control" id="incidentName" name="name" required>
+            </div>
+            <div class="mb-3">
+              <label for="incidentPhone" class="form-label">Phone Number</label>
+              <input type="tel" class="form-control" id="incidentPhone" name="phone" required>
+            </div>
+            <div class="mb-3">
+              <label for="incidentType" class="form-label">Emergency Type</label>
+              <select class="form-select" id="incidentType" name="type" required>
+                <option value="">Select type</option>
+                <option>Fire</option>
+                <option>Medical</option>
+                <option>Security</option>
+                <option>Utility</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="incidentLocation" class="form-label">Incident Location (Colorado Springs)</label>
+              <select class="form-select" id="incidentLocation" name="location" required>
+                <option value="">Select location</option>
+                <option>Briargate</option>
+                <option>Central</option>
+                <option>Downtown</option>
+                <option>East Colorado Springs</option>
+                <option>Falcon</option>
+                <option>Manitou Springs</option>
+                <option>Northgate</option>
+                <option>Old Colorado City</option>
+                <option>Powers</option>
+                <option>Rockrimmon</option>
+                <option>Security-Widefield</option>
+                <option>Southwest</option>
+                <option>West Colorado Springs</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="severitySlider" class="form-label">Severity Level (1-10): <span id="severityValue">5</span></label>
+              <input type="range" class="form-range" min="1" max="10" step="1" id="severitySlider" name="severity" value="5" required>
+              <div class="d-flex justify-content-between small">
+                <span>Low (1)</span>
+                <span>Medium (5)</span>
+                <span>High (10)</span>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-danger">Submit Report</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('energyChart');
+    if (ctx) {
+      new Chart(ctx, {
+        type: 'line',
+        data: { labels: ['Jan','Feb','Mar','Apr','May'], datasets: [{label:'kWh', data:[100,200,150,300,250], borderColor:'rgb(75,192,192)', tension:0.3}] },
+      });
+    }
+    const ctx2 = document.getElementById('breakdownChart');
+    if (ctx2) {
+      new Chart(ctx2, { type:'doughnut', data:{ labels:['HVAC','Lighting','Other'], datasets:[{data:[60,25,15], backgroundColor:['#007bff','#28a745','#ffc107']}] } });
+    }
+
+    // Severity slider value display
+    document.addEventListener('DOMContentLoaded', function() {
+      var slider = document.getElementById('severitySlider');
+      var valueSpan = document.getElementById('severityValue');
+      if (slider && valueSpan) {
+        slider.addEventListener('input', function() {
+          valueSpan.textContent = slider.value;
+        });
+      }
+      // Emergency form submit handler (AJAX)
+      var form = document.getElementById('emergencyForm');
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var data = Object.fromEntries(new FormData(form).entries());
+          fetch('/api/report-incident', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          })
+          .then(resp => resp.json().then(j => ({ok: resp.ok, status: resp.status, json: j})))
+          .then(result => {
+            if (result.ok) {
+              form.reset();
+              if (slider && valueSpan) valueSpan.textContent = slider.value;
+              var modal = bootstrap.Modal.getInstance(document.getElementById('emergencyModal'));
+              modal.hide();
+              alert('Emergency incident reported!');
+            } else {
+              alert(result.json.message || 'Failed to submit report.');
+            }
+          })
+          .catch(() => alert('Failed to submit report.'));
+        });
+      }
+    });
+  </script>
+{% endblock %}

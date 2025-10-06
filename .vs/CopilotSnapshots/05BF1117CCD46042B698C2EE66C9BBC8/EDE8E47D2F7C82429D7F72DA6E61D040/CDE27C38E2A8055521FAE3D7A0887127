@@ -1,0 +1,33 @@
+﻿{% extends 'base.html' %}
+{% block title %}Incident Reports - Colorado Springs EMS{% endblock %}
+{% block content %}
+<h1>Incident Reports</h1>
+<table class="table table-bordered table-hover mt-4">
+  <thead class="table-light">
+    <tr>
+      <th>ID</th>
+      <th>Timestamp</th>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Type</th>
+      <th>Location</th>
+      <th>Security Level</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in incidents %}
+    <tr>
+      <td>{{ i.id }}</td>
+      <td>{{ i.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+      <td>{{ i.name }}</td>
+      <td>{{ i.phone }}</td>
+      <td>{{ i.emergency_type }}</td>
+      <td>{{ i.location }}</td>
+      <td>{{ i.security_level }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="7" class="text-center">No incident reports found.</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

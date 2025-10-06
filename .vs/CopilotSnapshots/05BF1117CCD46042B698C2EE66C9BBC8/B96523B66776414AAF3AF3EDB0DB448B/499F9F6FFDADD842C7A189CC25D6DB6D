@@ -1,0 +1,81 @@
+﻿{% extends 'base.html' %}
+{% block title %}Home - Colorado Springs EMS{% endblock %}
+{% block content %}
+<div class="row align-items-center mb-5">
+  <div class="col-md-6">
+    <h1 class="display-4 fw-bold mb-3" style="color:var(--brand-color)">Colorado Springs Energy Management System</h1>
+    <p class="lead mb-4">Monitor, analyze, and optimize energy use across city buildings. Empowering Colorado Springs for a sustainable future.</p>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg me-2">View Dashboard</a>
+    <a href="{{ url_for('buildings') }}" class="btn btn-outline-secondary btn-lg">Explore Buildings</a>
+    <div class="mt-4">
+      <img src="{{ url_for('static', filename='images/amptier.svg') }}" alt="Amptier Logo" style="max-width:160px; width:60%;">
+    </div>
+  </div>
+  <div class="col-md-6 text-center">
+    <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="Colorado Springs Logo" style="max-width:320px; width:80%;">
+  </div>
+</div>
+
+<!-- Admin/User Portal Buttons -->
+<div class="row justify-content-center mb-5">
+  <div class="col-md-4 mb-3">
+    <div class="card h-100 shadow border-0 text-center p-4">
+      <div class="mb-3">
+        <span class="display-4" style="color:var(--brand-color)"><i class="bi bi-shield-lock"></i></span>
+      </div>
+      <h4 class="mb-2">Admin Portal</h4>
+      <p class="mb-3">Access management tools, user controls, and system settings for Colorado Springs EMS.</p>
+      <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg w-75">Admin Login</a>
+    </div>
+  </div>
+  <div class="col-md-4 mb-3">
+    <div class="card h-100 shadow border-0 text-center p-4">
+      <div class="mb-3">
+        <span class="display-4" style="color:var(--brand-accent)"><i class="bi bi-person-circle"></i></span>
+      </div>
+      <h4 class="mb-2">User Portal</h4>
+      <p class="mb-3">View building data, make reservations, and track energy usage. No login required.</p>
+      <a href="{{ url_for('dashboard') }}" class="btn btn-outline-secondary btn-lg w-75">Enter User Portal</a>
+    </div>
+  </div>
+</div>
+
+<div class="row g-4 mb-5">
+  <div class="col-md-4">
+    <div class="card h-100 shadow-sm border-0">
+      <div class="card-body text-center">
+        <div class="mb-3"><span class="display-5" style="color:var(--brand-color)"><i class="bi bi-bar-chart"></i></span></div>
+        <h5 class="card-title">Dashboard</h5>
+        <p class="card-text">Visualize energy trends, savings, and alerts for all city facilities in one place.</p>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100 shadow-sm border-0">
+      <div class="card-body text-center">
+        <div class="mb-3"><span class="display-5" style="color:var(--brand-accent)"><i class="bi bi-building"></i></span></div>
+        <h5 class="card-title">Buildings</h5>
+        <p class="card-text">Browse and manage Colorado Springs buildings, view meter data, and see recent alerts.</p>
+        <a href="{{ url_for('buildings') }}" class="btn btn-outline-secondary">View Buildings</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100 shadow-sm border-0">
+      <div class="card-body text-center">
+        <div class="mb-3"><span class="display-5" style="color:#ffc107"><i class="bi bi-upload"></i></span></div>
+        <h5 class="card-title">Upload Data</h5>
+        <p class="card-text">Easily upload meter readings, site photos, or CSV files to keep your data up to date.</p>
+        <a href="{{ url_for('upload') }}" class="btn btn-outline-secondary">Upload Data</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block head %}
+  <!-- Bootstrap Icons CDN for feature icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+{% endblock %}

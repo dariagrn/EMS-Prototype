@@ -1,0 +1,50 @@
+﻿/* Colorado Springs EMS custom styles */
+:root{
+  --brand-color:#0077C8; /* Colorado Springs blue */
+  --brand-accent:#43B047; /* Green accent */
+  --muted:#6c757d;
+  --background:#f4f8fb;
+}
+body{
+  font-family: 'Segoe UI', 'Inter', Arial, sans-serif;
+  background: var(--background);
+  color: #222;
+}
+.navbar, .footer {
+  background: #fff !important;
+  border-bottom: 1px solid #e3e3e3;
+}
+.navbar .brand, .navbar-brand {
+  color: var(--brand-color) !important;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.brand-logo{height:40px; margin-right:10px;}
+.footer small{color:var(--muted);}
+.card {
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+.btn-primary {
+  background: var(--brand-color);
+  border-color: var(--brand-color);
+}
+.btn-primary:hover {
+  background: var(--brand-accent);
+  border-color: var(--brand-accent);
+}
+.btn-outline-secondary {
+  border-color: var(--brand-color);
+  color: var(--brand-color);
+}
+.btn-outline-secondary:hover {
+  background: var(--brand-color);
+  color: #fff;
+}
+.bg-light {
+  background: #eaf4fa !important;
+}
+.list-group-item.active {
+  background: var(--brand-color);
+  border-color: var(--brand-color);
+}
