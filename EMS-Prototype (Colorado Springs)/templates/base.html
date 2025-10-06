@@ -25,23 +25,21 @@
   </head>
   <body>
     {% if not hide_navbar %}
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm" style="background-color: #0504aa; min-height: 80px;">
       <div class="container">
-        <a class="navbar-brand brand" href="{{ url_for('index') }}">
-          <img src="{{ url_for('static', filename='images/amptier_logo-removebg-preview.png') }}" class="brand-logo" alt="Colorado Springs logo"> EMS Colorado Springs
+        <a class="navbar-brand brand d-flex align-items-center" href="{{ url_for('index') }}" title="Home">
+          <img src="{{ url_for('static', filename='images/amptier_logo-removebg-preview.png') }}" class="brand-logo me-2" alt="Colorado Springs logo" style="height:50px;"> 
+          <span class="ms-2 fw-bold" style="font-size:1.5rem;">Colorado Springs Emergency Response</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmenu">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navmenu">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('index') }}">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('buildings') }}">Buildings</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('upload') }}">Upload</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url_for('contact') }}">Contact</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}">Login</a></li>
+            <li class="nav-item"><a class="btn btn-outline-danger ms-2" href="/" id="logoutBtn">Logout</a></li>
           </ul>
         </div>
       </div>

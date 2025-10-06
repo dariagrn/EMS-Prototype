@@ -536,6 +536,34 @@ def user_reports():
     reports = IncidentReport.query.order_by(IncidentReport.timestamp.desc()).all()
     return jsonify([r.to_dict() for r in reports])
 
+@app.route('/api/active-incidents')
+def active_incidents():
+    # For demo: map location names to coordinates (Colorado Springs neighborhoods)
+    location_coords = {
+        'Briargate': [38.9585, -104.7814],
+        'Central': [38.8462, -104.8007],
+        'Downtown': [38.8339, -104.8214],
+        'East Colorado Springs': [38.8590, -104.7557],
+        'Falcon': [38.9383, -104.6072],
+        'Manitou Springs': [38.8597, -104.9172],
+        'Northgate': [39.0167, -104.8208],
+        'Old Colorado City': [38.8503, -104.8572],
+        'Powers': [38.8837, -104.7169],
+        'Rockrimmon': [38.9111, -104.8606],
+        'Security-Widefield': [38.7472, -104.7358],
+        'Southwest': [38.7916, -104.8769],
+        'West Colorado Springs': [38.8590, -104.8769],
+        'Other': [38.8339, -104.8214],
+    }
+    incidents = IncidentReport.query.order_by(IncidentReport.timestamp.desc()).limit(100).all()
+    result = []
+    for i in incidents:
+        coords = location_coords.get(i.location)
+        d = i.to_dict()
+        d['location_coords'] = coords
+        result.append(d)
+    return jsonify(result)
+
 # CLI helper to initialize DB
 @app.cli.command('init-db')
 def init_db_command():
