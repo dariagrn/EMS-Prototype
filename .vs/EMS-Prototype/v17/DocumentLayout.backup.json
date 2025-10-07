@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\dashboard.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:EMS-Prototype (Colorado Springs)\\templates\\dashboard.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\app.py||{8B382828-6202-11D1-8870-0000F87579D2}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:EMS-Prototype (Colorado Springs)\\app.py||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\incidents.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:EMS-Prototype (Colorado Springs)\\templates\\incidents.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\home.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:EMS-Prototype (Colorado Springs)\\templates\\home.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\dashboard.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:EMS-Prototype (Colorado Springs)\\templates\\dashboard.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\static\\css\\styles.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
@@ -31,10 +35,6 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:EMS-Prototype (Colorado Springs)\\templates\\base.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\home.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:EMS-Prototype (Colorado Springs)\\templates\\home.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\logo.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:EMS-Prototype (Colorado Springs)\\templates\\logo.svg||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
@@ -50,17 +50,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "app.py",
               "DocumentMoniker": "C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\app.py",
               "RelativeDocumentMoniker": "EMS-Prototype (Colorado Springs)\\app.py",
               "ToolTip": "C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\app.py",
               "RelativeToolTip": "EMS-Prototype (Colorado Springs)\\app.py",
-              "ViewState": "AgIAAEICAAAAAAAAAAAAAEICAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGECAAAAAAAAAAAnwHECAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002457|",
               "WhenOpened": "2025-09-29T03:24:30.136Z",
               "IsPinned": true,
@@ -68,33 +68,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "incidents.html",
               "DocumentMoniker": "C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\incidents.html",
               "RelativeDocumentMoniker": "EMS-Prototype (Colorado Springs)\\templates\\incidents.html",
               "ToolTip": "C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\incidents.html",
               "RelativeToolTip": "EMS-Prototype (Colorado Springs)\\templates\\incidents.html",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADIAAAAAAAAAAAAAADcAAAA/AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-10-05T23:49:40.434Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-05T23:49:40.434Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "dashboard.html",
               "DocumentMoniker": "C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\dashboard.html",
               "RelativeDocumentMoniker": "EMS-Prototype (Colorado Springs)\\templates\\dashboard.html",
               "ToolTip": "C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\dashboard.html",
               "RelativeToolTip": "EMS-Prototype (Colorado Springs)\\templates\\dashboard.html",
-              "ViewState": "AgIAADcBAAAAAAAAAAAAAEABAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-10-05T23:47:04.715Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-05T23:47:04.715Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "buildings.html",
               "DocumentMoniker": "C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\buildings.html",
               "RelativeDocumentMoniker": "EMS-Prototype (Colorado Springs)\\templates\\buildings.html",
@@ -106,32 +104,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "home.html",
               "DocumentMoniker": "C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\home.html",
               "RelativeDocumentMoniker": "EMS-Prototype (Colorado Springs)\\templates\\home.html",
               "ToolTip": "C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\home.html",
               "RelativeToolTip": "EMS-Prototype (Colorado Springs)\\templates\\home.html",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAAAcAAABEAAAAAAAAAA==",
+              "ViewState": "AgIAACIAAAAAAAAAAAAAABIAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
               "WhenOpened": "2025-10-05T22:42:26.151Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "base.html",
               "DocumentMoniker": "C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\base.html",
               "RelativeDocumentMoniker": "EMS-Prototype (Colorado Springs)\\templates\\base.html",
               "ToolTip": "C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\base.html",
               "RelativeToolTip": "EMS-Prototype (Colorado Springs)\\templates\\base.html",
-              "ViewState": "AgIAAD8AAAAAAAAAACBjwEcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFUAAAAAAAAAAIBZwFoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2025-10-05T22:20:03.872Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-05T22:20:03.872Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "styles.css",
               "DocumentMoniker": "C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\static\\css\\styles.css",
               "RelativeDocumentMoniker": "EMS-Prototype (Colorado Springs)\\static\\css\\styles.css",
@@ -139,12 +136,11 @@
               "RelativeToolTip": "EMS-Prototype (Colorado Springs)\\static\\css\\styles.css",
               "ViewState": "AgIAAD8AAAAAAAAAAIBJwB4AAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-05T22:19:54.951Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-05T22:19:54.951Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "building_detail.html",
               "DocumentMoniker": "C:\\Users\\daria\\Source\\Amptier Repos\\EMS-Prototype\\EMS-Prototype (Colorado Springs)\\templates\\building_detail.html",
               "RelativeDocumentMoniker": "EMS-Prototype (Colorado Springs)\\templates\\building_detail.html",
@@ -164,8 +160,7 @@
               "RelativeToolTip": "EMS-Prototype (Colorado Springs)\\static\\css\\styles.css",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-10-05T22:19:55.502Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-05T22:19:55.502Z"
             },
             {
               "$type": "Document",

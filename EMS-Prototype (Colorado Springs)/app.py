@@ -6,6 +6,7 @@ from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 import jwt
+import requests
 
 # Basic configuration
 app = Flask(__name__)
@@ -95,6 +96,7 @@ class IncidentReport(db.Model):
     description = db.Column(db.Text)  # New field for emergency description
     media_filename = db.Column(db.String(255))  # New field for uploaded photo/video filename
     timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    admin_reply = db.Column(db.Text)  # New field for admin reply
 
     def to_dict(self):
         return {
@@ -107,6 +109,7 @@ class IncidentReport(db.Model):
             'description': self.description,
             'media_filename': self.media_filename,
             'timestamp': self.timestamp.isoformat(),
+            'admin_reply': self.admin_reply,  # Include admin reply in dict
         }
 
 # Utility functions
@@ -144,6 +147,29 @@ def token_required(f):
             return jsonify({'message': 'Token is invalid', 'error': str(e)}), 401
         return f(current_user, *args, **kwargs)
     return decorated
+
+# Weather API config
+# Set OpenWeatherMap API key directly in code (for local/testing only)
+WEATHER_API_KEY = '8823ebdcc546e7e31b204b65d808f948'
+WEATHER_URL = 'https://api.openweathermap.org/data/2.5/weather'
+CO_SPRINGS_COORDS = {'lat': 38.8339, 'lon': -104.8214}
+
+def get_weather():
+    params = {
+        'lat': CO_SPRINGS_COORDS['lat'],
+        'lon': CO_SPRINGS_COORDS['lon'],
+        'appid': WEATHER_API_KEY,
+        'units': 'imperial'
+    }
+    try:
+        resp = requests.get(WEATHER_URL, params=params, timeout=5)
+        data = resp.json()
+        icon = data['weather'][0]['icon'] if 'weather' in data and data['weather'] else None
+        temp = data['main']['temp'] if 'main' in data else None
+        desc = data['weather'][0]['description'] if 'weather' in data and data['weather'] else None
+        return {'icon': icon, 'temp': temp, 'desc': desc}
+    except Exception:
+        return {'icon': None, 'temp': None, 'desc': None}
 
 # Routes
 @app.route('/health', methods=['GET'])
@@ -520,10 +546,7 @@ def report_incident():
     return jsonify({'message': 'Incident reported successfully.'}), 201
 
 @app.route('/incidents')
-@token_required
-def list_incidents(current_user):
-    if current_user.role != 'admin':
-        return abort(403)
+def list_incidents():
     incidents = IncidentReport.query.order_by(IncidentReport.timestamp.desc()).all()
     return render_template('incidents.html', incidents=incidents)
 
@@ -564,12 +587,47 @@ def active_incidents():
         result.append(d)
     return jsonify(result)
 
+@app.route('/api/active-incidents-count')
+def active_incidents_count():
+    count = IncidentReport.query.count()
+    return jsonify({'count': count})
+
 # CLI helper to initialize DB
 @app.cli.command('init-db')
 def init_db_command():
     """Initialize the database."""
     create_db()
     print('Initialized the database.')
+
+@app.route('/incidents/<int:incident_id>/reply', methods=['POST'])
+def admin_reply(incident_id):
+    incident = IncidentReport.query.get_or_404(incident_id)
+    reply = request.form.get('admin_reply')
+    if reply is not None:
+        incident.admin_reply = reply
+        db.session.commit()
+        flash('Reply sent.', 'success')
+    else:
+        flash('Reply cannot be empty.', 'danger')
+    return redirect(url_for('list_incidents'))
+
+DEVELOPMENT_MODE = True
+
+@app.route('/incidents/<int:incident_id>/delete', methods=['POST'])
+def delete_incident(incident_id):
+    if not DEVELOPMENT_MODE:
+        # Normally you'd check current_user.role
+        return abort(403)
+
+    incident = IncidentReport.query.get_or_404(incident_id)
+    db.session.delete(incident)
+    db.session.commit()
+    flash('Incident deleted.', 'success')
+    return redirect(url_for('list_incidents'))
+
+@app.route('/api/weather')
+def weather():
+    return jsonify(get_weather())
 
 if __name__ == '__main__':
     # Ensure DB exists

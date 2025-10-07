@@ -237,6 +237,12 @@
               var modal = bootstrap.Modal.getInstance(document.getElementById('emergencyModal'));
               modal.hide();
               alert('Emergency incident reported!');
+              // Update Active Incidents count
+              fetch('/api/active-incidents-count')
+                .then(resp => resp.json())
+                .then(data => {
+                  document.getElementById('count-active').textContent = data.count;
+                });
             } else {
               alert(result.json.message || 'Failed to submit report.');
             }
@@ -284,7 +290,12 @@
           data.forEach(function(incident) {
             if (incident.location_coords) {
               var marker = L.marker(incident.location_coords).addTo(map);
-              marker.bindPopup(`<b>${incident.emergency_type}</b><br>${incident.location}<br>Severity: ${incident.severity_level}`);
+              marker.bindPopup(
+                `<b>${incident.emergency_type}</b><br>` +
+                `<div><strong>Summary:</strong> ${incident.description || 'No description provided.'}</div>` +
+                `<div>${incident.location}</div>` +
+                `<div>Severity: ${incident.severity_level}</div>`
+              );
             }
           });
         });
